@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohan Tare — DevOps Engineer</title>
+<meta name="description" content="Mohan Tare — DevOps Engineer. AWS, Kubernetes, Terraform, CI/CD automation, infrastructure-as-code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F0F2F4;
+    --panel: #FFFFFF;
+    --text: #14181D;
+    --text-secondary: #545C66;
+    --border: #DADDE0;
+    --accent: #0F8F82;
+    --accent-soft: #E4F3F1;
+    --font-display: 'Space Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-body: 'IBM Plex Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10161E;
+      --panel: #161D27;
+      --text: #EDF1F5;
+      --text-secondary: #8B96A5;
+      --border: #232C38;
+      --accent: #4FD7C4;
+      --accent-soft: rgba(79, 215, 196, 0.12);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #10161E;
+    --panel: #161D27;
+    --text: #EDF1F5;
+    --text-secondary: #8B96A5;
+    --border: #232C38;
+    --accent: #4FD7C4;
+    --accent-soft: rgba(79, 215, 196, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav.topnav {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topnav-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .navlinks {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .navlinks a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    transition: color 0.15s ease;
+  }
+  .navlinks a:hover { color: var(--accent); }
+
+  .navtoggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 560px) {
+    .navlinks { display: none; }
+    .navlinks.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 54px;
+      left: 0;
+      right: 0;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px 18px;
+      gap: 14px;
+    }
+    .navtoggle { display: inline-block; }
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    padding: 64px 0 40px;
+  }
+  .mark {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  h1.name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    line-height: 1.08;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .role {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .tagline {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    margin: 0 0 26px;
+    max-width: 480px;
+  }
+  .tagline .sep { color: var(--border); margin: 0 2px; }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+  }
+  .contact-row a { color: var(--text-secondary); text-decoration: none; }
+  .contact-row a:hover { color: var(--accent); }
+  .contact-row span {
+    padding: 0 14px;
+    border-left: 1px solid var(--border);
+  }
+  .contact-row span:first-child { padding-left: 0; border-left: none; }
+
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 11px 22px;
+    border-radius: 4px;
+    transition: opacity 0.15s ease;
+  }
+  .cta:hover { opacity: 0.85; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 44px 0; border-top: 1px solid var(--border); }
+  header.hero + section { border-top: 1px solid var(--border); }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    letter-spacing: -0.005em;
+  }
+
+  #about p { max-width: 640px; color: var(--text); }
+  #about p.lede { font-size: 1.02rem; }
+
+  .competencies {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+  }
+  .competencies span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 11px;
+  }
+
+  /* ---------- Impact ---------- */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 24px;
+  }
+  .stat .figure {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.3rem;
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .label {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .skill-row:last-child { border-bottom: none; }
+  .skill-row dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text);
+  }
+  .skill-row dd { margin: 0; color: var(--text-secondary); }
+
+  @media (max-width: 560px) {
+    .skill-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- Experience ---------- */
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-bottom: 2px;
+  }
+  .job-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .job-loc { font-size: 0.88rem; color: var(--text-secondary); }
+  .job-company {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin-bottom: 26px;
+  }
+  .job-dates { font-size: 0.88rem; color: var(--text-secondary); }
+
+  .workstream {
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+  }
+  .workstream:first-of-type { border-top: none; padding-top: 0; }
+  .workstream h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin: 0 0 10px;
+  }
+  .workstream ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .workstream li {
+    margin-bottom: 8px;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  .workstream li:last-child { margin-bottom: 0; }
+  .workstream strong { color: var(--accent); font-weight: 600; }
+
+  /* ---------- Education ---------- */
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .edu-degree { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; }
+  .edu-institution { color: var(--text-secondary); font-size: 0.92rem; margin-top: 4px; }
+  .edu-dates { color: var(--text-secondary); font-size: 0.88rem; white-space: nowrap; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 40px 0 56px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+  }
+  footer .foot-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="#top">Mohan Tare</a>
+    <button class="navtoggle" id="navtoggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <header class="hero">
+    <div class="mark">MT</div>
+    <h1 class="name">Mohan Tare</h1>
+    <p class="role">DevOps Engineer</p>
+    <p class="tagline">AWS <span class="sep">/</span> Kubernetes <span class="sep">/</span> Terraform <span class="sep">/</span> CI/CD Automation <span class="sep">/</span> Infrastructure Automation</p>
+    <div class="contact-row">
+      <span>Nagpur, Maharashtra, India</span>
+      <span><a href="tel:+919307951074">+91-9307951074</a></span>
+      <span><a href="mailto:taremohan45@gmail.com">taremohan45@gmail.com</a></span>
+      <span><a href="https://linkedin.com/in/mohan-s-tare" target="_blank" rel="noopener">linkedin.com/in/mohan-s-tare</a></span>
+    </div>
+    <a class="cta" href="mailto:taremohan45@gmail.com">Say hello</a>
+  </header>
+
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <p class="lede">DevOps Engineer with 3+ years of experience designing and optimizing AWS infrastructure at scale. Proven track record reducing OPEX by 40% and deployment time by 60% through multi-tenant architecture design and platform automation. Skilled at solving complex platform challenges, enabling rapid and reliable deployments, and driving automation that unlocks team productivity. Strong foundation in cloud architecture, automation, and cost optimization with hands-on experience across the full DevOps stack.</p>
+    <div class="competencies">
+      <span>AWS</span>
+      <span>Kubernetes</span>
+      <span>Terraform</span>
+      <span>CI/CD Automation</span>
+      <span>Infrastructure-as-Code</span>
+      <span>Cost Optimization</span>
+      <span>AI-Powered Automation</span>
+      <span>Cross-Functional Collaboration</span>
+    </div>
+  </section>
+
+  <section id="impact">
+    <h2 class="section-title">Impact</h2>
+    <div class="impact-grid">
+      <div class="stat">
+        <div class="figure">~94%</div>
+        <div class="label">Environment provisioning time cut (5&ndash;6 hrs &rarr; 20 min), adopted by 90%+ of engineering</div>
+      </div>
+      <div class="stat">
+        <div class="figure">40%</div>
+        <div class="label">OPEX reduced through automated cost-optimization and resource scheduling</div>
+      </div>
+      <div class="stat">
+        <div class="figure">60%</div>
+        <div class="label">Deployment time reduced through platform automation</div>
+      </div>
+      <div class="stat">
+        <div class="figure">90%+</div>
+        <div class="label">Of engineering now using the internal IaC provisioning framework</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="section-title">Experience</h2>
+
+    <div class="job-header">
+      <span class="job-title">DevOps Engineer &ndash; I</span>
+      <span class="job-loc">Nagpur, India</span>
+    </div>
+    <div class="job-header">
+      <span class="job-company">Jonas Collections and Recovery India Pvt. Ltd.</span>
+      <span class="job-dates">June 2023 &ndash; September 2026</span>
+    </div>
+
+    <div class="workstream">
+      <h3>Infrastructure-as-Code Platform</h3>
+      <ul>
+        <li>Designed and built an internal Terraform-style infrastructure-as-code framework generating scalable, secure AWS CloudFormation templates extended with custom Lambda functions and Step Functions orchestration, integrated into a dynamic Jenkins + AWS CI/CD platform (ECS, EC2, EKS, RDS, S3, IAM) supporting <strong>on-demand ephemeral environments</strong> and parameterized pipelines.</li>
+        <li>Enabled teams to spin up <strong>fully configured, production-parity environments on demand</strong>, removing manual setup as a bottleneck for new feature rollouts.</li>
+      </ul>
+    </div>
+
+    <div class="workstream">
+      <h3>AI-Powered Chatbot Service</h3>
+      <ul>
+        <li>Engineered a production-grade AI-powered chatbot leveraging <strong>AWS Bedrock</strong> with custom data sources in S3, integrating LLM capabilities into customer-facing proprietary software with reliable uptime and scalable request handling.</li>
+      </ul>
+    </div>
+
+    <div class="workstream">
+      <h3>Automated AMI Generation Pipeline</h3>
+      <ul>
+        <li>Engineered an automated provisioning pipeline using CloudFormation-based AMI generation with EC2 Image Builder and Lambda, <strong>eliminating manual image creation</strong> and enabling consistent, repeatable deployments across environments.</li>
+      </ul>
+    </div>
+
+    <div class="workstream">
+      <h3>Cost Optimization Initiatives</h3>
+      <ul>
+        <li>Reduced OPEX by <strong>40%</strong> through cost-optimization strategies: Lambda-based resource scheduling, Jenkins automation pipelines, system monitoring, and usage-based optimization in collaboration with stakeholders.</li>
+      </ul>
+    </div>
+
+    <div class="workstream">
+      <h3>Cross-Functional Collaboration</h3>
+      <ul>
+        <li>Partnered with architecture, platform, and product teams to design scalable, secure technical solutions; collaborated with engineering teams to solve complex deployment challenges, produced clear technical documentation, and drove infrastructure adoption <strong>across multiple product lines</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <dl class="skills-list">
+      <div class="skill-row"><dt>Cloud Services (AWS)</dt><dd>EC2, ECS, S3, IAM, VPC, Lambda, CloudFront, Route53, WAF, Bedrock, EC2 Image Builder</dd></div>
+      <div class="skill-row"><dt>IaC</dt><dd>CloudFormation, Terraform</dd></div>
+      <div class="skill-row"><dt>CI/CD</dt><dd>Jenkins, ArgoCD</dd></div>
+      <div class="skill-row"><dt>Containers</dt><dd>Docker, Kubernetes, Helm</dd></div>
+      <div class="skill-row"><dt>SCM Tools</dt><dd>GitHub, Bitbucket</dd></div>
+      <div class="skill-row"><dt>Monitoring</dt><dd>CloudWatch</dd></div>
+      <div class="skill-row"><dt>Scripting</dt><dd>Bash, Groovy, YAML</dd></div>
+      <div class="skill-row"><dt>AI Tools</dt><dd>Amazon Q, Cursor, SurePath, Kiro, Claude</dd></div>
+      <div class="skill-row"><dt>Project Management</dt><dd>Jira</dd></div>
+      <div class="skill-row"><dt>Artifact Management</dt><dd>Nexus</dd></div>
+    </dl>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-row">
+      <div>
+        <div class="edu-degree">Bachelor of Engineering (Computer Science and Engineering)</div>
+        <div class="edu-institution">Shri Ramdeobaba College of Engineering and Management (Ramdeobaba University), Nagpur, India</div>
+      </div>
+      <div class="edu-dates">August 2019 &ndash; May 2023</div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Mohan Tare &mdash; DevOps Engineer, Nagpur, India</div>
+    <div class="foot-links">
+      <a href="mailto:taremohan45@gmail.com">taremohan45@gmail.com</a>
+      <a href="tel:+919307951074">+91-9307951074</a>
+      <a href="https://linkedin.com/in/mohan-s-tare" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('navtoggle');
+    var links = document.getElementById('navlinks');
+    if (!btn || !links) return;
+    btn.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        links.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
