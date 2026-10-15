@@ -145,18 +145,28 @@
     padding: 64px 0 40px;
   }
   .mark {
-    width: 44px;
-    height: 44px;
-    border: 1.5px solid var(--accent);
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border: 2px solid var(--accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 1.4rem;
     color: var(--accent);
-    margin-bottom: 22px;
+    margin-bottom: 24px;
+  }
+  .mark img {
+    position: absolute;
+    inset: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--panel);
   }
   h1.name {
     font-family: var(--font-display);
@@ -342,6 +352,84 @@
   .edu-institution { color: var(--text-secondary); font-size: 0.92rem; margin-top: 4px; }
   .edu-dates { color: var(--text-secondary); font-size: 0.88rem; white-space: nowrap; }
 
+  /* ---------- Writing ---------- */
+  .writing-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .writing-head .section-title { margin: 0; }
+  .feed-nav { display: flex; gap: 8px; }
+  .feed-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .feed-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .feed-btn:disabled { opacity: 0.35; cursor: default; }
+
+  .feed {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -24px;
+    padding: 4px 24px 14px;
+    scroll-padding-left: 24px;
+    scrollbar-width: thin;
+  }
+  .post-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px 18px 16px;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .post-date { font-size: 0.8rem; color: var(--text-secondary); }
+  .post-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+  .post-summary {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-more {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .writing-more { margin-top: 6px; font-size: 0.92rem; }
+
   /* ---------- Footer ---------- */
   footer {
     padding: 40px 0 56px;
@@ -371,6 +459,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
+      <li id="navwriting" hidden><a href="#writing">Writing</a></li>
     </ul>
   </div>
 </nav>
@@ -378,7 +467,7 @@
 <div class="wrap" id="top">
 
   <header class="hero">
-    <div class="mark">MT</div>
+    <div class="mark">MT<img src="https://github.com/TareMohan.png?size=200" alt="Mohan Tare" width="96" height="96"></div>
     <h1 class="name">Mohan Tare</h1>
     <p class="role">DevOps Engineer</p>
     <p class="tagline">AWS <span class="sep">/</span> Kubernetes <span class="sep">/</span> Terraform <span class="sep">/</span> CI/CD Automation <span class="sep">/</span> Infrastructure Automation</p>
@@ -441,37 +530,17 @@
     </div>
 
     <div class="workstream">
-      <h3>Infrastructure-as-Code Platform</h3>
       <ul>
-        <li>Designed and built an internal Terraform-style infrastructure-as-code framework generating scalable, secure AWS CloudFormation templates extended with custom Lambda functions and Step Functions orchestration, integrated into a dynamic Jenkins + AWS CI/CD platform (ECS, EC2, EKS, RDS, S3, IAM) supporting <strong>on-demand ephemeral environments</strong> and parameterized pipelines.</li>
-        <li>Enabled teams to spin up <strong>fully configured, production-parity environments on demand</strong>, removing manual setup as a bottleneck for new feature rollouts.</li>
-      </ul>
-    </div>
-
-    <div class="workstream">
-      <h3>AI-Powered Chatbot Service</h3>
-      <ul>
-        <li>Engineered a production-grade AI-powered chatbot leveraging <strong>AWS Bedrock</strong> with custom data sources in S3, integrating LLM capabilities into customer-facing proprietary software with reliable uptime and scalable request handling.</li>
-      </ul>
-    </div>
-
-    <div class="workstream">
-      <h3>Automated AMI Generation Pipeline</h3>
-      <ul>
-        <li>Engineered an automated provisioning pipeline using CloudFormation-based AMI generation with EC2 Image Builder and Lambda, <strong>eliminating manual image creation</strong> and enabling consistent, repeatable deployments across environments.</li>
-      </ul>
-    </div>
-
-    <div class="workstream">
-      <h3>Cost Optimization Initiatives</h3>
-      <ul>
+        <li>Designed an internal infrastructure-as-code framework that generates secure CloudFormation templates for various resources, extended with Lambda and Step Functions and integrated into Jenkins pipelines for <strong>on-demand ephemeral environments</strong>.</li>
+        <li>Enabled teams to spin up <strong>fully configured, production-parity environments on demand</strong>, including through an <strong>MS Teams-integrated AI agent</strong> that runs the Jenkins setup job from parameters provided in chat.</li>
+        <li>Engineered a production-grade <strong>AI-powered chatbot</strong> leveraging <strong>AWS Bedrock</strong> with custom data sources in S3, integrating LLM capabilities into customer-facing proprietary software with reliable uptime and scalable request handling.</li>
         <li>Reduced OPEX by <strong>40%</strong> through cost-optimization strategies: Lambda-based resource scheduling, Jenkins automation pipelines, system monitoring, and usage-based optimization in collaboration with stakeholders.</li>
-      </ul>
-    </div>
-
-    <div class="workstream">
-      <h3>Cross-Functional Collaboration</h3>
-      <ul>
+        <li>Configured <strong>Kubernetes workloads</strong> including Deployments, Services, and Ingress, with <strong>ALB Target Group Binding</strong>, PVCs, Secrets, ConfigMaps, and Node Affinity to support production applications.</li>
+        <li>Tuned Deployment rolling-update settings (<strong>maxSurge</strong> and <strong>maxUnavailable</strong>) to keep applications available while new versions roll out.</li>
+        <li>Packaged and released Kubernetes applications with <strong>Helm</strong>, simplifying configuration, versioning, and rollout management.</li>
+        <li>Managed <strong>monthly application releases</strong> through Jenkins pipelines, coordinating deployments and post-release validation across environments.</li>
+        <li>Engineered an automated provisioning pipeline using CloudFormation-based AMI generation with EC2 Image Builder and Lambda, <strong>eliminating manual image creation</strong> and enabling consistent, repeatable deployments across environments.</li>
+        <li>Set up <strong>Prometheus</strong> monitoring for application and cluster health.</li>
         <li>Partnered with architecture, platform, and product teams to design scalable, secure technical solutions; collaborated with engineering teams to solve complex deployment challenges, produced clear technical documentation, and drove infrastructure adoption <strong>across multiple product lines</strong>.</li>
       </ul>
     </div>
@@ -482,12 +551,13 @@
     <dl class="skills-list">
       <div class="skill-row"><dt>Cloud Services (AWS)</dt><dd>EC2, ECS, S3, IAM, VPC, Lambda, CloudFront, Route53, WAF, Bedrock, EC2 Image Builder</dd></div>
       <div class="skill-row"><dt>IaC</dt><dd>CloudFormation, Terraform</dd></div>
-      <div class="skill-row"><dt>CI/CD</dt><dd>Jenkins, ArgoCD</dd></div>
+      <div class="skill-row"><dt>CI/CD</dt><dd>Jenkins</dd></div>
       <div class="skill-row"><dt>Containers</dt><dd>Docker, Kubernetes, Helm</dd></div>
       <div class="skill-row"><dt>SCM Tools</dt><dd>GitHub, Bitbucket</dd></div>
-      <div class="skill-row"><dt>Monitoring</dt><dd>CloudWatch</dd></div>
+      <div class="skill-row"><dt>Monitoring</dt><dd>Prometheus, CloudWatch</dd></div>
       <div class="skill-row"><dt>Scripting</dt><dd>Bash, Groovy, YAML</dd></div>
       <div class="skill-row"><dt>AI Tools</dt><dd>Amazon Q, Cursor, SurePath, Kiro, Claude</dd></div>
+      <div class="skill-row"><dt>Methodologies</dt><dd>Agile, Scrum, Kanban</dd></div>
       <div class="skill-row"><dt>Project Management</dt><dd>Jira</dd></div>
       <div class="skill-row"><dt>Artifact Management</dt><dd>Nexus</dd></div>
     </dl>
@@ -504,6 +574,22 @@
     </div>
   </section>
 
+  <section id="writing" hidden>
+    <div class="writing-head">
+      <h2 class="section-title">Latest writing</h2>
+      <div class="feed-nav">
+        <button type="button" class="feed-btn" id="feedprev" aria-label="Previous posts">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2L4 7l5 5"/></svg>
+        </button>
+        <button type="button" class="feed-btn" id="feednext" aria-label="Next posts">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="feed" id="postlist" tabindex="0" aria-label="Latest LinkedIn posts"></div>
+    <p class="writing-more"><a href="https://linkedin.com/in/mohan-s-tare" target="_blank" rel="noopener">More posts on LinkedIn</a></p>
+  </section>
+
   <footer>
     <div>Mohan Tare &mdash; DevOps Engineer, Nagpur, India</div>
     <div class="foot-links">
@@ -516,7 +602,90 @@
 </div>
 
 <script>
+  /* To show your latest LinkedIn posts, add up to three entries below.
+     Each needs a title, a date, a one or two sentence summary, and the post URL
+     (open the post on LinkedIn, click the three dots, choose Copy link to post).
+     The Latest writing section stays hidden while this list is empty.
+     Example entry:
+       { title: "Post title", date: "October 2026", summary: "One or two sentences.", url: "https://www.linkedin.com/posts/..." } */
+  var POSTS = [
+    {
+      title: "AI for everyday DevOps work",
+      date: "October 2026",
+      summary: "Where AI earns its place in day-to-day infrastructure work, and how to begin without taking on unnecessary risk.",
+      url: "https://lnkd.in/p/dycdQ36d"
+    },
+    {
+      title: "AWS accounts without a credit card",
+      date: "October 2026",
+      summary: "AWS has made it easier to try, but the more interesting change is how it handles cost control once you start paying.",
+      url: "https://lnkd.in/p/dGfgZCRi"
+    },
+    {
+      title: "New in the EC2 console",
+      date: "October 2026",
+      summary: "A quick look at two EC2 console additions and what they suggest about how capacity decisions get made.",
+      url: "https://lnkd.in/p/dMTUM9dj"
+    }
+  ];
+
   (function () {
+    var list = document.getElementById('postlist');
+    var section = document.getElementById('writing');
+    var navItem = document.getElementById('navwriting');
+    if (!list || !section || !POSTS.length) return;
+    POSTS.slice(0, 3).forEach(function (p) {
+      var a = document.createElement('a');
+      a.className = 'post-card';
+      a.href = p.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var d = document.createElement('div');
+      d.className = 'post-date';
+      d.textContent = p.date;
+      var t = document.createElement('div');
+      t.className = 'post-title';
+      t.textContent = p.title;
+      var s = document.createElement('p');
+      s.className = 'post-summary';
+      s.textContent = p.summary;
+      var m = document.createElement('span');
+      m.className = 'post-more';
+      m.textContent = 'Read on LinkedIn';
+      a.appendChild(d); a.appendChild(t); a.appendChild(s); a.appendChild(m);
+      list.appendChild(a);
+    });
+    section.hidden = false;
+    if (navItem) navItem.hidden = false;
+
+    var prev = document.getElementById('feedprev');
+    var next = document.getElementById('feednext');
+    var navBox = document.querySelector('.feed-nav');
+    function step() {
+      var card = list.querySelector('.post-card');
+      return card ? card.getBoundingClientRect().width + 16 : 300;
+    }
+    function update() {
+      var max = list.scrollWidth - list.clientWidth - 2;
+      if (prev) prev.disabled = list.scrollLeft <= 2;
+      if (next) next.disabled = list.scrollLeft >= max;
+      if (navBox) navBox.style.display = max > 0 ? 'flex' : 'none';
+    }
+    if (prev) prev.addEventListener('click', function () { list.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    if (next) next.addEventListener('click', function () { list.scrollBy({ left: step(), behavior: 'smooth' }); });
+    list.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+
+<script>
+  (function () {
+    var avatar = document.querySelector('.mark img');
+    if (avatar) {
+      if (avatar.complete && avatar.naturalWidth === 0) { avatar.remove(); }
+      else { avatar.addEventListener('error', function () { avatar.remove(); }); }
+    }
     var btn = document.getElementById('navtoggle');
     var links = document.getElementById('navlinks');
     if (!btn || !links) return;
